@@ -1,0 +1,29 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "This is an api for Cassa Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -L",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imanolcorimayo/cassa-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imanolcorimayo/cassa-api/issues"
+  },
+  "homepage": "https://github.com/imanolcorimayo/cassa-api#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "axios": "^0.25.0",
+    "dotenv": "^14.3.2",
+    "express": "^4.17.2",
+    "sequelize": "^6.15.0"
+  }
+}
