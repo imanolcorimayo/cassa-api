@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const functions = require('../controllers/products')
+const functions = require('../controllers/product')
 
 // POST
 router.post('/', functions.createProduct)

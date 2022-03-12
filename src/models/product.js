@@ -6,19 +6,19 @@ module.exports = (sequelize) => {
     {
       name: {
         type: DataTypes.STRING,
-        // allowNull: false,
+        allowNull: false,
         unique: true,
       },
       type: {
         type: DataTypes.STRING,
-        // allowNull: false
+        allowNull: false
       },
       price: {
-        type: DataTypes.STRING,
-        // allowNull: false
+        type: DataTypes.BIGINT,
+        allowNull: false
       },
       quantity: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         // allowNull: false
       },
       buy_unit: {
