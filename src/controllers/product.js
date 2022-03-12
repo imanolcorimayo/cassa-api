@@ -12,6 +12,7 @@ module.exports = {
             buy_unit,
             sell_unit,
         }=req.body;
+
         try {
             const newProduct = await Product.create({
                 name,
@@ -33,10 +34,17 @@ module.exports = {
             res.status(501).send(error)
         }
     },
+    getProducts: async (req, res) => {
+        try {
+            const products = await Product.findAll({});
+            console.log(products)
+            res.send(products)
+        } catch (error) {
+            console.log(error)
+        }
+    },
     deleteProduct: async (req, res) => {
     },
     updateProduct: async (req, res) => {
     },
-    getProducts: async (req, res) => {
-    }
 }

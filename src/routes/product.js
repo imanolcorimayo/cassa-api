@@ -6,7 +6,7 @@ const functions = require('../controllers/product')
 router.post('/', functions.createProduct)
 
 // GET
-router.get('/succes', functions.getProducts)
+router.get('/', functions.getProducts)
 
 // UPDATE
 router.put('/', functions.updateProduct)
