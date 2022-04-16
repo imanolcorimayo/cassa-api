@@ -13,7 +13,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false
       },
-      price: {
+      buy_price: {
+        type: DataTypes.BIGINT,
+        allowNull: false
+      },
+      sell_price: {
         type: DataTypes.BIGINT,
         allowNull: false
       },
