@@ -46,6 +46,22 @@ module.exports = {
         }
     },
     deleteProduct: async (req, res) => {
+        const {id}=req.headers;
+        console.log(id)
+        try {
+            
+            const response = await Product.destroy({
+                where: { id },
+            })
+            if(response){ 
+                res.status(200).send("Product was deleted")
+            } else {
+                res.status(404).send("Product already deleted")
+            }
+        } catch (error) {
+            res.status(501).send(error)
+            console.error(error)
+        }
     },
     updateProduct: async (req, res) => {
         const {
@@ -66,11 +82,11 @@ module.exports = {
             if (product) {
                 product.name = name ? name : product.name;
                 product.type = category ? category : product.type;
-                product.buy_price= buyPrice ? buyPrice : product.buy_price;
-                product.sell_price= sellPrice ? sellPrice : product.sell_price;
-                product.quantity= quantity ? quantity: product.quantity;
-                product.buy_unit= buyUnit ? buyUnit : product.buy_unit;
-                product.sell_unit= sellUnit ? sellUnit : product.sell_unit;
+                product.buy_price = buyPrice ? buyPrice : product.buy_price;
+                product.sell_price = sellPrice ? sellPrice : product.sell_price;
+                product.quantity = quantity ? quantity: product.quantity;
+                product.buy_unit = buyUnit ? buyUnit : product.buy_unit;
+                product.sell_unit = sellUnit ? sellUnit : product.sell_unit;
                 product.save()
                 res.status(200).send('Product was updated!')
             } else {

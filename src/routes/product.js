@@ -14,6 +14,6 @@ router.get('/', functions.getProducts)
 router.put('/', functions.updateProduct)
 
 // DELETE
-router.delete('/succes', functions.deleteProduct)
+router.delete('/', functions.deleteProduct)
 
 module.exports= router;
