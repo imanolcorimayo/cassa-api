@@ -4,9 +4,10 @@ module.exports = {
     createSale: async (req, res) => {
         const { products, client, total, status, details, paidWay } = req.body;
 
+        // TODO reduce the stock depending the products and quantity
         try {
             const newSale = await Sales.create({
-                products,
+                products: JSON.stringify(products),
                 client,
                 total,
                 status,
@@ -22,7 +23,7 @@ module.exports = {
             }
         } catch (error) {
             console.error(error);
-            res.status(501).send(error);
+            res.status(404).send(error);
         }
     },
     getSales: async (req, res) => {
