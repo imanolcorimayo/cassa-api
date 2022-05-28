@@ -2,7 +2,13 @@ const { Sales } = require("../db.js");
 
 module.exports = {
     createSale: async (req, res) => {
-        const { products, client, total, status, details, paidWay } = req.body;
+        const { products, client, total, status, details, paidWay, date } = req.body;
+
+        // validations
+
+        if (!products || !total || !status || !date) {
+            return res.status(400).send("Error, faltan datos importantes en la compra");
+        }
 
         // TODO reduce the stock depending the products and quantity
         try {
@@ -12,6 +18,7 @@ module.exports = {
                 total,
                 status,
                 details,
+                date,
                 paid_way: paidWay,
             });
 
@@ -28,7 +35,24 @@ module.exports = {
     },
     getSales: async (req, res) => {
         try {
-            const sales = await Sales.findAll({});
+            const sales = await Sales.findAll({
+                where: {
+                    status: "paid out",
+                },
+            });
+            res.status(200).send(sales);
+        } catch (error) {
+            console.log(error);
+            res.status(404).send(error);
+        }
+    },
+    getTrusted: async (req, res) => {
+        try {
+            const sales = await Sales.findAll({
+                where: {
+                    status: "trusted",
+                },
+            });
             res.status(200).send(sales);
         } catch (error) {
             console.log(error);

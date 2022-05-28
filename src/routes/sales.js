@@ -9,6 +9,7 @@ router.post("/", functions.createSale);
 
 // GET
 router.get("/", functions.getSales);
+router.get("/trusted", functions.getTrusted);
 
 // UPDATE
 router.put("/", functions.updateSale);

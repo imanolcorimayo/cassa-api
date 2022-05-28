@@ -23,6 +23,10 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
+        date: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
         paid_way: {
             type: DataTypes.ENUM,
             values: ["MP", "cash", "other"],
