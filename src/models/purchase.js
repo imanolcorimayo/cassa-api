@@ -1,31 +1,25 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  return sequelize.define("sales", {
-    user_id: {
+  return sequelize.define("purchase", {
+    provider_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    business_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    merchant_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
     },
     details: {
       type: DataTypes.STRING,
     },
-    paid_way: {
+    pay_way: {
       type: DataTypes.ENUM,
       values: ["MP", "cash", "other"],
     },
-    is_trusted: {
+    busuness_id: {
+      type: DataTypes.INTEGER,
+    },
+    merchant_id: {
       type: DataTypes.INTEGER,
     },
     total: {
-      type: DataTypes.BIGINT,
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
   });
