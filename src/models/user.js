@@ -7,18 +7,6 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
-    province_id: {
-      type: DataTypes.INTEGER,
-      // allowNull: false
-    },
-    zip_city_id: {
-      type: DataTypes.INTEGER,
-      // allowNull: false
-    },
-    address_id: {
-      type: DataTypes.INTEGER,
-      // allowNull: false
-    },
     user_name: {
       type: DataTypes.STRING,
       // allowNull: false,

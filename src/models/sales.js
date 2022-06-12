@@ -2,18 +2,6 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   return sequelize.define("sales", {
-    user_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    business_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    merchant_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     details: {
       type: DataTypes.STRING,
     },

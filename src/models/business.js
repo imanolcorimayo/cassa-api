@@ -6,18 +6,8 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       allowNull: false,
     },
-    address_id: {
-      type: DataTypes.INTEGER,
-    },
-    statistics_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     business_type: {
       type: DataTypes.STRING,
-    },
-    zip_id: {
-      type: DataTypes.INTEGER,
     },
     name: {
       type: DataTypes.STRING,
