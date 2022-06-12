@@ -30,12 +30,13 @@ fs.readdirSync(path.join(__dirname, "/models"))
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach((model) => model(sequelize));
 let entries = Object.entries(sequelize.models);
-// Receate db if already exist - This creates the table, dropping it first if it already existed
+// Recreate db if already exist - This creates the table, dropping it first if it already existed
 sequelize.sync({ force: true });
 sequelize.models = Object.fromEntries(entries);
 
 const {
   product,
+  province,
   sales,
   user,
   address,
@@ -45,18 +46,107 @@ const {
   month_statistics,
   product_category,
   provider,
-  povince,
   purchase,
   statistics,
   type_merchant,
   zip_city,
 } = sequelize.models;
 
-// Stablishing relations
-business.hasOne(product);
-product.belongsTo(business);
+// **************** USER RELATIONS ****************
+
+// user - sales | one to many
+user.hasMany(sales);
+sales.belongsTo(user);
+
+// user - merchant | one to one
+user.hasOne(merchant);
+merchant.belongsTo(user);
+
+// **************** MERCHANT RELATIONS ****************
+
+// merchant - business | many to many
+merchant.belongsToMany(business, { through: "business_merchant" });
+business.belongsToMany(merchant, { through: "business_merchant" });
+
+// merchant - type_merchant | one to one
+merchant.hasOne(type_merchant);
+type_merchant.belongsTo(merchant);
+
+// **************** TYPE_MERCHANT RELATIONS ****************
+
+// merchant - type_merchant | one to one
+type_merchant.hasOne(merchant);
+merchant.belongsTo(type_merchant);
+
+// **************** BUSINESS RELATIONS ****************
+
+// business - product | one to many
 business.hasMany(product);
-A.belongsToMany(B, { through: "C" }); // A BelongsToMany B through the junction table C
+product.belongsTo(business);
+
+// business - product_category | one to many
+business.hasMany(product_category);
+product_category.belongsTo(business);
+
+// business - sales | one to many
+business.hasMany(sales);
+sales.belongsTo(business);
+
+// business - purchase | one to many
+business.hasMany(purchase);
+purchase.belongsTo(business);
+
+// **************** PRODUCT RELATIONS ****************
+
+// purchase - product | many to many
+purchase.belongsToMany(product, { through: "product_purchase" });
+product.belongsToMany(purchase, { through: "product_purchase" });
+
+// provider - product | many to many
+sales.belongsToMany(product, { through: "product_sales" });
+product.belongsToMany(sales, { through: "product_sales" });
+
+// **************** PROVIDER RELATIONS ****************
+
+// provider - product | one to many
+provider.hasMany(purchase);
+purchase.belongsTo(provider);
+
+// **************** CITY RELATIONS ****************
+
+// city - zip_city | one to many
+city.hasMany(zip_city);
+zip_city.belongsTo(city);
+
+// **************** PROVINCE RELATIONS ****************
+
+// province - zip_city | one to many
+province.hasMany(zip_city);
+zip_city.belongsTo(province);
+
+// **************** ADDRESS RELATIONS ****************
+
+// address - user | one to one
+address.hasOne(user);
+user.belongsTo(address);
+
+// address - provider | one to one
+address.hasOne(provider);
+provider.belongsTo(address);
+
+// address - business | one to one
+address.hasOne(business);
+business.belongsTo(address);
+
+// **************** STATISTICS RELATIONS ****************
+
+// statistics - month_statistics | one to one
+statistics.hasOne(month_statistics);
+month_statistics.belongsTo(statistics);
+
+// statistics - business | one to one
+statistics.hasOne(business);
+business.belongsTo(statistics);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
