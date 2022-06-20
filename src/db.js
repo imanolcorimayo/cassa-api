@@ -50,9 +50,15 @@ const {
   statistics,
   type_merchant,
   zip_city,
+  user_statistics,
+  user_month_statistics,
 } = sequelize.models;
 
 // **************** USER RELATIONS ****************
+
+// user - business | many to many
+merchant.belongsToMany(business, { through: "favorites" });
+business.belongsToMany(merchant, { through: "favorites" });
 
 // user - sales | one to many
 user.hasMany(sales);
@@ -147,6 +153,14 @@ month_statistics.belongsTo(statistics);
 // statistics - business | one to one
 statistics.hasOne(business);
 business.belongsTo(statistics);
+
+// user_statistics - user_month_statistics | one to one
+user_statistics.hasOne(user_month_statistics);
+user_month_statistics.belongsTo(user_statistics);
+
+// user_statistics - user | one to one
+user_statistics.hasOne(user);
+user.belongsTo(user_statistics);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
